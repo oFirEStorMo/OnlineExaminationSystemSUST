@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+
+    <style>
+        .information {
+            page-break-inside: avoid;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .description {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .description:after {
+            content: "..............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................";
+        }
+
+        .page-number {
+            flex-shrink: 0;
+        }
+
+        hr {
+            height: 4px !important;
+            background-color: black;
+            opacity: 100;
+            border: none;
+            border-top: solid 4px #000 !important;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        td{
+            padding: 2% 2% 2% 2%;
+        }
+        .sidenav {
+            height: 100%;
+            width: 24%; 
+            position: fixed; 
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: rgb(0, 0, 0); 
+            overflow-x: hidden; 
+            padding-top: 2%;
+        }
+        header{
+            display: none;
+        }
+        @media print {
+            .sidenav {
+                display: none;
+            }
+            .main{
+                display: inline;
+            }
+            header{
+                display: block !important;
+            }
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+        
+        .sidenav a {
+            padding: 1% 4% 3% 8%;
+            text-decoration: none;
+            font-size: 100%;
+            color: #818181;
+            display: block;
+        }
+        
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        
+        .main {
+            margin-left: 34%;
+            margin-right: 10%; 
+            margin-top: 5%;
+            margin-bottom: 5%;
+        }
+        .subnav{
+            margin-left: 5% !important;
+            font-size: 90% !important;
+        }
+
+    </style>
+
+</head>
+<body style="background-color: rgb(220, 220, 220);">
+    <div class="sidenav">
+        <a style="font-size: 110%;" href="#">Software Requirements Specification</a>
+        <a href="#1">1. Introduction</a>
+        <div class="subnav">
+            <a href="#1.1">1.1 Purpose</a>
+            <a href="#1.2">1.2 Document Conventions</a>
+            <a href="#1.3">1.3 Intended Audience</a>
+            <a href="#1.4">1.4 Product Scope</a>
+            <a href="#1.5">1.5 References</a>
+        </div>
+        <a href="#2">2. Overall Description</a>
+        <div class="subnav">
+            <a href="#2.1">2.1 Product Perspective</a>
+            <a href="#2.2">2.2 Product Functions</a>
+            <a href="#2.3">2.3 User Classes</a>
+            <a href="#2.4">2.4 Operating Environment</a>
+            <a href="#2.5">2.5 Design and Implementation</a>
+            <a href="#2.6">2.6 User Documentation</a>
+            <a href="#2.7">2.7 Assumptions</a>
+        </div>
+        <a href="#3">3. External Interface Requirements</a>
+        <div class="subnav">
+            <a href="#3.1">3.1 User Interfaces</a>
+            <a href="#3.2">3.2 Hardware Interfaces</a>
+            <a href="#3.3">3.3 Software Interfaces</a>
+            <a href="#3.4">3.4 Communications Interfaces</a>
+        </div>
+        <a href="#4">4. System Features</a>
+        <div class="subnav">
+            <a href="#4.1">4.1 Log in using Google</a>
+            <a href="#4.2">4.2 Create an Exam-Cohort </a>
+            <a href="#4.3">4.3 Add other users as candidates</a>
+            <a href="#4.4">4.4 Create an assessment</a>
+            <a href="#4.5">4.5 Participate in exam</a>
+            <a href="#4.6">4.6 View obtained marks </a>
+            <a href="#4.7">4.7 Review and change marks</a>
+            <a href="#4.8">4.8 Download detailed mark sheets</a>
+            <a href="#4.9">4.9 Log out</a>
+        </div>
+        <a href="#5">5. Other Nonfunctional Requirements</a>
+        <div class="subnav">
+            <a href="#5.1">5.1 Performance Requirements</a>
+            <a href="#5.2">5.2 Safety Requirements</a>
+            <a href="#5.3">5.3 Security Requirements</a>
+            <a href="#5.4">5.4 Software Quality Attributes</a>
+            <a href="#5.5">5.5 Business Rules</a>
+        </div>
+        <a href="#6">6. Other Requirements</a>
+    </div>
+    <div class="main">
+        <div>
+            <hr class="mt-5"></hr>
+                <div class="row mt-4">
+                    <div align="right">
+                        <h2>Software Requirements<br>Specification</h2>
+                    </div>
+                    <div align="right">
+                        <h4>for</h4>
+                    </div>
+                    <div align="right">
+                        <h2>Online Examination System</h2><br><br>
+                    </div>
+                    <div align="right">
+                        <h5>Version 1.0 approved</h5><br><br>
+                    </div>
+                    <div align="right">
+                        <h5>Prepared By-</h5>
+                    </div>
+                    <div align="right">
+                        <h5>BM Monjur Morshed</h5>
+                    </div>
+                    <div align="right">
+                        <h5>Md. Abdullah Al Mahmud</h5>
+                    </div>
+                    <div align="right">
+                        <h5>Arman Sykot</h5><br><br>
+                    </div>
+                    <div align="right">
+                        <h5>North South University</h5><br><br>
+                    </div>
+                    <div align="right">
+                        <h5>26-01-2023</h5>
+                    </div>
+                </div>
+        </div> 
+        <p style="page-break-before:always"></p>
+        <div>
+            <header align="right" style="font-size: 10px">Page ii</header><br>
+            <p class="fw-bold" style="font-size: 18px">Table of Contents</p><br>
+            <div class="item" >
+                <div class="description fw-bold">Table of Contents</div>
+                <div class="page-number fw-bold">ii</div>
+            </div>
+            <div>
+                <div class="item">
+                    <div class="description fw-bold">Revision History</div>
+                    <div class="page-number fw-bold">iii</div>
+                </div>
+            </div>
+            <div>
+                <div class="item">
+                    <div class="description fw-bold">1.&nbsp;&nbsp;Introduction</div>
+                    <div class="page-number fw-bold">1</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">1.1&nbsp;&nbsp;Purpose</div>
+                    <div class="page-number">1</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">1.2&nbsp;&nbsp;Document Conventions</div>
+                    <div class="page-number">1</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">1.3&nbsp;&nbsp;Intended Audience and Reading Suggestions</div>
+                    <div class="page-number">1</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">1.4&nbsp;&nbsp;Product Scope</div>
+                    <div class="page-number">1</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">1.5&nbsp;&nbsp;References</div>
+                    <div class="page-number">2</div>
+                </div>
+            </div>
+            <div>
+                <div class="item">
+                    <div class="description fw-bold">2.&nbsp;&nbsp;Overall Description</div>
+                    <div class="page-number fw-bold">2</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">2.1&nbsp;&nbsp;Product Perspective</div>
+                    <div class="page-number">2</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">2.2&nbsp;&nbsp;Product Functions</div>
+                    <div class="page-number">2</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">2.3&nbsp;&nbsp;User Classes and Characteristics</div>
+                    <div class="page-number">2</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">2.4&nbsp;&nbsp;Operating Environment</div>
+                    <div class="page-number">2</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">2.5&nbsp;&nbsp;Design and Implementation Constraints</div>
+                    <div class="page-number">2</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">2.6&nbsp;&nbsp;User Documentation</div>
+                    <div class="page-number">3</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">2.7&nbsp;&nbsp;Assumptions and Dependencies</div>
+                    <div class="page-number">3</div>
+                </div>
+            </div>
+            <div>
+                <div class="item">
+                    <div class="description fw-bold">3.&nbsp;&nbsp;External Interface Requirements</div>
+                    <div class="page-number fw-bold">3</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">3.1&nbsp;&nbsp;User Interfaces</div>
+                    <div class="page-number">3</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">3.2&nbsp;&nbsp;Hardware Interfaces</div>
+                    <div class="page-number">3</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">3.3&nbsp;&nbsp;Software Interfaces</div>
+                    <div class="page-number">3</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">3.4&nbsp;&nbsp;Communications Interfaces</div>
+                    <div class="page-number">4</div>
+                </div>
+            </div>
+            <div>
+                <div class="item">
+                    <div class="description fw-bold">4.&nbsp;&nbsp;System Features</div>
+                    <div class="page-number fw-bold">4</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">4.1&nbsp;&nbsp;Log in using Google</div>
+                    <div class="page-number">4</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">4.2&nbsp;&nbsp;Create an Exam-Cohort
+                    </div>
+                    <div class="page-number">5</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">4.3&nbsp;&nbsp;Add other users as candidates
+                    </div>
+                    <div class="page-number">5</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">4.4&nbsp;&nbsp;Create an assessment
+                    </div>
+                    <div class="page-number">6</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">4.5&nbsp;&nbsp;Participate in exam
+                    </div>
+                    <div class="page-number">7</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">4.6&nbsp;&nbsp;View obtained marks
+                    </div>
+                    <div class="page-number">7</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">4.7&nbsp;&nbsp;Review and change marks
+                    </div>
+                    <div class="page-number">8</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">4.8&nbsp;&nbsp;Download detailed mark sheets 
+                    </div>
+                    <div class="page-number">8</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">4.9&nbsp;&nbsp;Log out 
+                    </div>
+                    <div class="page-number">9</div>
+                </div>
+            </div>
+            <div>
+                <div class="item">
+                    <div class="description fw-bold">5.&nbsp;&nbsp;Other Nonfunctional Requirements</div>
+                    <div class="page-number fw-bold">9</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">5.1&nbsp;&nbsp;Performance Requirements</div>
+                    <div class="page-number">9</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">5.2&nbsp;&nbsp;Safety Requirements</div>
+                    <div class="page-number">9</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">5.3&nbsp;&nbsp;Security Requirements</div>
+                    <div class="page-number">9</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">5.4&nbsp;&nbsp;Software Quality Attributes</div>
+                    <div class="page-number">10</div>
+                </div>
+                <div class="item">
+                    <div class="description ms-4">5.5&nbsp;&nbsp;Business Rules</div>
+                    <div class="page-number">10</div>
+                </div>
+            </div>
+            <p style="page-break-before:always"></p>
+            <header align="right" style="font-size: 10px">Page iii</header><br>
+            <div>
+                <div class="item">
+                    <div class="description fw-bold">6.&nbsp;&nbsp;Other Requirements</div>
+                    <div class="page-number fw-bold">10</div>
+                </div>
+            </div>
+            <div>
+                <div class="item">
+                    <div class="description fw-bold">Appendix A: Glossary</div>
+                    <div class="page-number fw-bold">10</div>    
+                </div>
+                <div class="item">
+                    <div class="description fw-bold">Appendix B: Analysis Models</div>
+                    <div class="page-number fw-bold">10</div>
+                </div>
+            </div>
+            <br><br>
+            <p class="fw-bold" style="font-size: 18px">Revision History</p><br>
+            <table style="width:100%">
+                <tr>
+                    <th style="width: 25%; text-align: center;">Name</th>
+                    <th style="width: 15%; text-align: center;">Date</th>
+                    <th style="width: 40%; text-align: center;">Reason of Changes</th>
+                    <th style="width: 20%; text-align: center;">Version</th>
+                </tr>
+                <tr>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                </tr>
+            </table>
+        </div>
+        <p style="page-break-before:always"></p>
+        <div>
+            <header align="right" style="font-size: 10px">Page 1</header>
+        </div>
+        <div id="1">
+            <h2 class="my-4">1. Introduction</h2>
+            <div class="information">
+                <div id="1.1" class="heading fs-4 h2 my-3">
+                    1.1 Purpose
+                </div>
+                <div class="details">
+                    The purpose of this SRS document is to provide a detailed overview of our software product, its parameters and goals. This document describes the project's target audience and its user interface, hardware and software requirements. It defines how our client, team and audience see the product and its functionality. Nonetheless, it helps any designer and developer to assist in software delivery lifecycle (SDLC) processes.
+                </div>
+            </div>
+            <div class="information">
+                <div id="1.2" class="heading fs-4 h2 my-3">1.2 Document Conventions</div>
+                <div class="details">
+                  <strong>Heading:</strong> Font Style: Bold, Font Size: 18<br>
+                  <strong>Sub Heading:</strong> Font Style: Bold, Font Size: 14<br>
+                  <strong>Explanations:</strong> Font Style: Normal, Font Size: 12
+                </div>
+            </div>
+            <div class="information">
+                <div id="1.3" class="heading fs-4 h2 my-3">
+                  1.3 Intended Audience and Reading Suggestions
+                </div>
+                <div class="details">
+                    This document is a prototype for an Online Examination System. This document is intended for a variety of readers, such as clients, developers, project managers, engineers, users, testers, and documentation writers. For instance, the clients will have clear instructions on how to handle the project (website/app).  Most importantly, the developers team will be able to know every single detail of the software so that they can execute it accurately. Moreover, from this SRS, the project managers can estimate the required time and work load to finish this project, and thus plan everything accordingly. Software Engineers will not find it difficult to understand the functionality of the software, during the maintenance phase. Similarly, QA professionals need to understand all the technical aspects that lie behind the product's concept. User documentation writers will be able to write the “user's manual” in ease. Lastly, the users will be provided with precise instructions on how to use the software’s applications in both app and website versions. The remaining sections of this document provide a general description, including characteristics of the users of this project, the product's hardware, and the functional and data requirements of the product. It is suggested that the SRS be read in order using the table of content provided above.    
+                </div>
+            </div>
+            <div class="information">
+                <div id="1.4" class="heading fs-4 h2 my-3">
+                    1.4 Product Scope
+                </div>
+                <div class="details">
+                    The software system will be an Online Examination System for a wide range of users, not restricted to having evaluators who are professional educators only. Every user can create an examination cohort to take assessment and become an evaluator of that assessment. This system will be designed to maximize the productivity of each evaluator by providing tools to assist in automating the checking of the assessment and publishing the marks, which would otherwise have to be performed manually. By maximizing the evaluator's work efficiency the system will meet the examiner’s need while remaining easy to understand and use.
+                </div>
+            </div>
+            <p style="page-break-before:always"></p>
+            <div>
+                <header align="right" style="font-size: 10px">Page 2</header>
+            </div>
+            <div class="information">
+                <div id="1.5" class="heading fs-4 h2 my-3">1.5 References</div>
+                <div class="details">
+                  <a class="d-block" href="https://www.djangoproject.com/" target="_blank">Django</a>
+                  <a class="d-block" href="https://reactjs.org/" target="_blank">ReactJS</a>
+                  <a class="d-block" href="https://dev.mysql.com/doc/" target="_blank">MySQL</a>
+                </div>
+            </div>
+        </div>
+        <div id="2">
+            <h2 class="my-4">2. Overall Description</h2>
+            <div class="information">
+                <div id="2.1" class="heading fs-4 h2 my-3">
+                    2.1 Product Perspective
+                </div>
+                <div class="details">
+                    This Online Examination System is a self-contained product. It is mainly originated for the need of a fair assessment even though the candidates are not being invigilated during the assessment. This system makes taking assessments, setting questions and rechecking assessment not a laborious task for the evaluator.
+                </div>
+            </div>
+            <div class="information">
+                <div id="2.2" class="heading fs-4 h2 my-3">
+                    2.2 Product Functions
+                </div>
+                <div class="details">
+                    The software functions are handy and user-friendly thus providing a smooth experience for any user. The major functions of the software are as follows:
+                    <ul>
+                        <li>Any user can create an examination cohort.</li>
+                        <li>The user can create one or more assessments within the exam cohort.</li>
+                        <li>The candidates can sit for an assessment.</li>
+                        <li>The evaluator can adjust the mark of any evaluated assessment.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="information">
+                <div id="2.3" class="heading fs-4 h2 my-3">
+                    2.3 User Classes and Characteristics
+                </div>
+                <div class="details">
+                    All users can access the software from two different platforms: Web<br>There are two different types of actors for each assessment. They are the evaluators and the candidates. 
+                </div>
+            </div>
+            <div class="information">
+                <div id="2.4" class="heading fs-4 h2 my-3">
+                    2.4 Operating Environment
+                </div>
+                <div class="details">
+                    The operating environments are mentioned below. They are as follows:
+                    <ul>
+                        <li>Platform: Web</li>
+                        <li>Operating System: Windows</li>
+                        <li>Database Configuration: MySQL</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="information">
+                <div id="2.5" class="heading fs-4 h2 my-3">
+                    2.5 Design and Implementation Constraints
+                </div>
+                <div class="details">
+                    The backend is developed using Django and the frontend is developed using ReactJS. 
+                </div>
+            </div>
+            <p style="page-break-before:always"></p>
+            <div>
+                <header align="right" style="font-size: 10px">Page 3</header>
+            </div>
+            <div class="information">
+                <div id="2.6" class="heading fs-4 h2 my-3">
+                    2.6 User Documentation
+                </div>
+                <div class="details">
+                    The product will provide users with a user manual which will be divided into two sections. The first section will provide information to a user who wants to be an evaluator. This section will cover in detail: how the evaluator can set the questions and modify the automated marking of the assessment if required. The second section will provide the candidate with a methodology of how to give the assessment.
+                </div>
+            </div>
+            <div class="information">
+                <div id="2.7" class="heading fs-4 h2 my-3">
+                    2.7 Assumptions and Dependencies
+                </div>
+                <div class="details">
+                    Users must have a working internet. Web users must have a working browser to use the product.
+                </div>
+            </div>
+            
+        </div>
+        <div id="3">
+            <h2 class="my-4">3. External Interface Requirements</h2>
+            <div class="information">
+                <div id="3.1" class="heading fs-4 h2 my-3">3.1 User Interfaces</div>
+                <div class="details">
+                    The user will be taken to the homepage first. Users can sign in using Google. The user can create an exam cohort and prepare an assessment using the plus sign in the bottom right corner of the home page. The homepage serves like a dashboard where the user can see all the assessments where he/she is an evaluator or a candidate. The user can sit for an assessment by clicking the assessment window where he/she is a candidate. 
+                </div>
+            </div>
+            <div class="information">
+                <div id="3.2" class="heading fs-4 h2 my-3">3.2 Hardware Interfaces</div>
+                <div class="details">
+                    The website uses a microphone to record the answers of the micro-viva of the candidate.
+                </div>
+            </div>
+            <div class="information">
+                <div id="3.3" class="heading fs-4 h2 my-3">3.3 Software Interfaces</div>
+                <div class="details">
+                    The Online Examination System depends on the following software components. They are as follows:
+                <ul>
+                    <li>
+                        Django - Django is a high-level Python web framework that enables rapid development of secure and maintainable websites. The backend of the software is built using this framework.
+                    </li>
+                    <li>
+                        ReactJS - React is a free and open-source front-end JavaScript library for building user interfaces based on UI components. The frontend or UI of this software is built using this library.
+                    </li>
+                    <li>
+                        MySQL - MySQL is an open-source relational database management system. The data of this system will be stored in this DBMS.
+                    </li>
+                </ul>
+                </div>
+            </div>
+            <p style="page-break-before:always"></p>
+            <div>
+                <header align="right" style="font-size: 10px">Page 4</header>
+            </div>
+            <div class="information">
+                <div id="3.4" class="heading fs-4 h2 my-3">3.4 Communications Interfaces</div>
+                <div class="details">
+                    The web application will send data to the backend using rest API. AI speech recognition will be used for English speech to text conversion. All these communications will happen via HTTP. Authentication for google sign up is done by google.
+                </div>
+            </div>
+        </div>
+        <div id="4">
+            <h2 class="my-4">4. System Features</h2>
+            <div class="information">
+                <div id="4.1" class="heading fs-4 h2 my-3">
+                    4.1 Log in using Google
+                </div>
+                <div class="details">
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Use case name:-</p>
+                        <p class="d-inline">Log in using Google</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Actor(s):-</p>
+                        <p class="d-inline">User</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Brief Overview:-</p>
+                        <p class="d-inline">The user tries to log in to system using google log in.</p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="fw-bold text-center">Typical Course of Events</div>
+                        <table style="width: 70%">
+                            <tr>
+                                <th style="width: 50%" class="text-center">Actor action</th>
+                                <th class="text-center">System response</th>
+                            </tr>
+                            <tr>
+                                <td>1. The user clicks the "Log in using Google" button from the login page.</td>
+                                <td>2. The system will response by verifying the credentials through google API. After successful verification, it will redirect to homepage.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="mt-2">
+                        <div class="fw-bold ps-5">Alternative Course of Events</div>
+                        <div class="ps-5">
+                            4.1.1 If the user enter incorrect google credentials, the system will redirect to login page.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p style="page-break-before:always"></p>
+            <div>
+                <header align="right" style="font-size: 10px">Page 5</header>
+            </div>
+            <div class="information">
+                <div id="4.2" class="heading fs-4 h2 my-3">
+                    4.2 Create an Exam-Cohort
+                </div>
+                <div class="details">
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Use case name:-</p>
+                        <p class="d-inline">Create an Exam-Cohort</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Actor(s):-</p>
+                        <p class="d-inline">User</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Brief Overview:-</p>
+                        <p class="d-inline">The user creates an exam-cohort  to take assessment.</p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="fw-bold text-center">Typical Course of Events</div>
+                        <table style="width: 70%">
+                            <tr>
+                                <th style="width: 50%" class="text-center">Actor action</th>
+                                <th class="text-center">System response</th>
+                            </tr>
+                            <tr>
+                                <td>1. The user clicks on the plus sign in the bottom right corner of the home page.</td>
+                                <td>2. The system provides a form to enter the name of the exam-cohort.</td>
+                            </tr>
+                            <tr>
+                                <td>3. The user enters the name and clicks the create button.</td>
+                                <td>4. The system then assigns the user as the evaluator for that exam-cohort. </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="mt-2">
+                        <div class="fw-bold ps-5">Alternative Course of Events</div>
+                        <div class="ps-5">
+                            4.2.1  If the given name of the exam-cohort is greater than 255 characters, the system will notify the user and stay on the same page.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="information">
+                <div id="4.3" class="heading fs-4 h2 my-3">
+                    4.3 Add other users as candidates
+                </div>
+                <div class="details">
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Use case name:-</p>
+                        <p class="d-inline">Add other users as candidates</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Actor(s):-</p>
+                        <p class="d-inline">User as evaluator</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Brief Overview:-</p>
+                        <p class="d-inline">The user adds other users as candidates.</p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="fw-bold text-center">Typical Course of Events</div>
+                        <table style="width: 70%">
+                            <tr>
+                                <th style="width: 50%" class="text-center">Actor action</th>
+                                <th class="text-center">System response</th>
+                            </tr>
+                            <tr>
+                                <td>1. The user clicks on the add button to add other users as candidates.</td>
+                                <td>2. The system provides a text field to the user.</td>
+                            </tr>
+                            <tr>
+                                <td>3. The user writes one or more email addresses and clicks the add button.</td>
+                                <td>4. The system adds those users as candidates whose email addresses were provided by the evaluator.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="mt-2">
+                        <div class="fw-bold ps-5">Alternative Course of Events</div>
+                        <div class="ps-5">
+                            4.3.1   If at least one of the email addresses is not registered in the system, the system will mark those email addresses and disable the add button.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p style="page-break-before:always"></p>
+            <div>
+                <header align="right" style="font-size: 10px">Page 6</header>
+            </div>
+            <div class="information">
+                <div id="4.4" class="heading fs-4 h2 my-3">
+                    4.4 Create an assessment
+                </div>
+                <div class="details">
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Use case name:-</p>
+                        <p class="d-inline">Create assessment</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Actor(s):-</p>
+                        <p class="d-inline">User as evaluator</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Brief Overview:-</p>
+                        <p class="d-inline">The user creates an assessment for the candidates.</p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="fw-bold text-center">Typical Course of Events</div>
+                        <table style="width: 70%">
+                            <tr>
+                                <th style="width: 50%" class="text-center">Actor action</th>
+                                <th class="text-center">System response</th>
+                            </tr>
+                            <tr>
+                                <td>1. The user clicks the create assessment button on the Exam-Cohort page.</td>
+                                <td>2. The system asks for 'available date-time', the 'due date-time' for the assessment and to specify the type of question - mcq or micro-viva.</td>
+                            </tr>
+                            <tr>
+                                <td>3. The user specifies the question type. For an mcq test, the user marks the correct answer(s). For a micro-viva, the user supplies the correct answer(s) as a recording with a maximum of five words. The user sets a specified mark and maximum time for answering each question.</td>
+                                <td>The system then saves the assessment created by the user.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="mt-2">
+                        <div class="fw-bold ps-5">Alternative Course of Events</div>
+                        <div class="ps-5">
+                            4.4.1   The system sends an error message if the 'available date-time' for the assessment is before the current date and time.
+                        </div>
+                        <div class="ps-5">
+                            4.4.2   The system sends an error message if the 'due date-time' for the assessment is after a long period of time from the 'available date-time' of the assessment.
+                        </div>
+                        <div class="ps-5">
+                            4.4.3   The system sends an error message if the recorded answer for the miro-viva exceeds five words.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p style="page-break-before:always"></p>
+            <div>
+                <header align="right" style="font-size: 10px">Page 7</header>
+            </div>
+            <div class="information">
+                <div id="4.5" class="heading fs-4 h2 my-3">
+                    4.5 Participate in exam
+                </div>
+                <div class="details">
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Use case name:-</p>
+                        <p class="d-inline">Participate in exam</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Actor(s):-</p>
+                        <p class="d-inline">User as candidate</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Brief Overview:-</p>
+                        <p class="d-inline">The user can participate in the exam.</p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="fw-bold text-center">Typical Course of Events</div>
+                        <table style="width: 70%">
+                            <tr>
+                                <th style="width: 50%" class="text-center">Actor action</th>
+                                <th class="text-center">System response</th>
+                            </tr>
+                            <tr>
+                                <td>1. The user starts the exam by clicking the start exam button.</td>
+                                <td>2. The system will provide mcq or micro-viva questions one by one in random order. The options for the mcq questions will also be randomized.</td>
+                            </tr>
+                            <tr>
+                                <td>3. For a mcq test, the user clicks the desired option to answer each question. For a micro-viva, the user answers using his/her voice by clicking on the record button. The user clicks the next button.</td>
+                                <td>4. For the mcq test, the system saves the assessment given by the user. For the micro-viva, the system records and saves the answer given by the user.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="mt-2">
+                        <div class="fw-bold ps-5">Alternative Course of Events</div>
+                        <div class="ps-5">
+                            4.5.1   If the time limit for an answer exceeds, the system will automatically change the question and keep record of the given answer.
+                        </div>
+                        <div class="ps-5">
+                            4.5.2   If the user fails to provide any answer before the time limit, the system will save the empty answer.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="information">
+                <div id="4.6" class="heading fs-4 h2 my-3">
+                    4.6 View obtained marks
+                </div>
+                <div class="details">
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Use case name:-</p>
+                        <p class="d-inline">View obtained marks</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Actor(s):-</p>
+                        <p class="d-inline">User as candidate</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Brief Overview:-</p>
+                        <p class="d-inline">The user can view obtained marks.</p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="fw-bold text-center">Typical Course of Events</div>
+                        <table style="width: 70%">
+                            <tr>
+                                <th style="width: 50%" class="text-center">Actor action</th>
+                                <th class="text-center">System response</th>
+                            </tr>
+                            <tr>
+                                <td>1. The user clicks on the view score button to view the scores.</td>
+                                <td>2. The system presents the score obtained in the assessment.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="mt-2">
+                        <div class="fw-bold ps-5">Alternative Course of Events</div>
+                        <div class="ps-5">
+                            N/A
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p style="page-break-before:always"></p>
+            <div>
+                <header align="right" style="font-size: 10px">Page 8</header>
+            </div>
+            <div class="information">
+                <div id="4.7" class="heading fs-4 h2 my-3">
+                    4.7 Review and change marks
+                </div>
+                <div class="details">
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Use case name:-</p>
+                        <p class="d-inline">Review and change marks</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Actor(s):-</p>
+                        <p class="d-inline">User as evaluator</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Brief Overview:-</p>
+                        <p class="d-inline">The user can review and change marks.</p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="fw-bold text-center">Typical Course of Events</div>
+                        <table style="width: 70%">
+                            <tr>
+                                <th style="width: 50%" class="text-center">Actor action</th>
+                                <th class="text-center">System response</th>
+                            </tr>
+                            <tr>
+                                <td>1. The user clicks on the check score button to review or change marks.</td>
+                                <td>2. The system presents the scores obtained in the assessment by each candidate.</td>
+                            </tr>
+                            <tr>
+                                <td>3. To review or change marks the user chooses to see/hear/read the answers of a candidate.</td>
+                                <td>4. The system then updates the score of a candidate if his/her marks have been changed.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="mt-2">
+                        <div class="fw-bold ps-5">Alternative Course of Events</div>
+                        <div class="ps-5">
+                            4.7.1   The system shows warning message if the user tries to leave the review page before saving any changes.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="information">
+                <div id="4.8" class="heading fs-4 h2 my-3">
+                    4.8 Download detailed mark sheet
+                </div>
+                <div class="details">
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Use case name:-</p>
+                        <p class="d-inline">Download detailed mark sheet</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Actor(s):-</p>
+                        <p class="d-inline">User as evaluator</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Brief Overview:-</p>
+                        <p class="d-inline">The user can download a detailed mark sheet as a spreadsheet.</p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="fw-bold text-center">Typical Course of Events</div>
+                        <table style="width: 70%">
+                            <tr>
+                                <th style="width: 50%" class="text-center">Actor action</th>
+                                <th class="text-center">System response</th>
+                            </tr>
+                            <tr>
+                                <td>1. The user clicks the download button to download a detailed mark sheet.</td>
+                                <td>2. The system downloads the detailed mark sheet as a spreadsheet.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="mt-2">
+                        <div class="fw-bold ps-5">Alternative Course of Events</div>
+                        <div class="ps-5">
+                            N/A
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p style="page-break-before:always"></p>
+            <div>
+                <header align="right" style="font-size: 10px">Page 9</header>
+            </div>
+            <div class="information">
+                <div id="4.9" class="heading fs-4 h2 my-3">
+                    4.9 Log out
+                </div>
+                <div class="details">
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Use case name:-</p>
+                        <p class="d-inline">Log out</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Actor(s):-</p>
+                        <p class="d-inline">User</p>
+                    </div>
+                    <div>
+                        <p class="ps-5 fw-bold d-inline">Brief Overview:-</p>
+                        <p class="d-inline">A user can log out from the application whenever he/she wants to</p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="fw-bold text-center">Typical Course of Events</div>
+                        <table style="width: 70%">
+                            <tr>
+                                <th style="width: 50%" class="text-center">Actor action</th>
+                                <th class="text-center">System response</th>
+                            </tr>
+                            <tr>
+                                <td>1. User clicks the "Log out" button.</td>
+                                <td>2. The system logs out the user from the application and redirects to homepage.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="mt-2">
+                        <div class="fw-bold ps-5">Alternative Course of Events</div>
+                        <div class="ps-5">
+                            N/A
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="5">
+            <h2 class="my-4">5. Other Nonfunctional Requirements</h2>
+            <div class="information">
+                <div id="5.1" class="heading fs-4 h2 my-3">5.1 Performance Requirements</div>
+                <div class="details">
+                    <strong>Mobile App:</strong> Needs to be lightweight and responsive. <br>
+                    <strong>Database:</strong> The queries for DBMS data should be optimized as there would be a huge number of users.<br>
+                    <strong>Speech to text recognition:</strong> The AI used for this feature must be up to date. Inability of correct transformation to text might lead to serious confusions. 
+                    <strong>Overall Performance:</strong> The software should have an optimal speed of response, throughput, execution time, and storage capacity.
+                </div>
+            </div>
+            <div class="information">
+                <div id="5.2" class="heading fs-4 h2 my-3">5.2 Safety Requirements</div>
+                <div class="details">
+                    All data must be stored and never deleted from the database. For instance, the marks of each candidate of older assessments must be accessible even if the assessment is over.
+                </div>
+            </div>
+            <div class="information">
+                <div id="5.3" class="heading fs-4 h2 my-3">5.3 Security Requirements</div>
+                <div class="details">
+                    Only the user as evaluator in an exam-cohort can review or change marks. The time constraint for each assessment can only be altered by the evaluator.
+                </div>
+            </div>
+            <p style="page-break-before:always"></p>
+            <div>
+                <header align="right" style="font-size: 10px">Page 10</header>
+            </div>
+            <div class="information">
+                <div id="5.4" class="heading fs-4 h2 my-3">5.4 Software Quality Attributes</div>
+                <div class="details">
+                    <strong>Availability:</strong>
+                    It is an online system and available 24/7 to all users.
+                    <br>
+                    <strong>Correctness:</strong>
+                    This software provides correct automated evaluation of assessment.
+                    <br>
+                    <strong>Flexibility:</strong>
+                    The software has both web and mobile app versions, thus making it flexible to use.
+                    <br>
+                    <strong>Maintainability:</strong>
+                    This software can be restored easily and rapidly after a failure.
+                    <br>
+                    <strong>Reliability:</strong>
+                    This software is made secure so that no candidate will be able to tamper with the obtained results in the assessment and also the time constraint given to complete an assessment.
+                    <br>
+                    <strong>Interoperability:</strong>
+                    The software follows the service-oriented architecture.
+                    <br>
+                    <strong>Usability:</strong>
+                    This software has a user-friendly user interface.
+                </div>
+            </div>
+            <div class="information">
+                <div id="5.5" class="heading fs-4 h2 my-3">5.5 Business Rules</div>
+                <div class="details">
+                    This product will be free to use for all the users with a Google account.
+                </div>
+            </div>
+        </div>
+        <div id="6">
+            <h2 class="my-4">6. Other Requirements</h2>
+            <div class="information">
+                <div class="heading fs-4 h2 my-3">Appendix A: Glossary</div>
+                <div class="details">
+                    <ul>
+                        <li><strong>AI: </strong> 
+                            Artificial Intelligence in full, is the simulation of human intelligence processes by machines, especially computer systems.
+                        </li>
+                        <li><strong>API: </strong> 
+                            It stands for Application Protocol Interface. An API is basically a software intermediate that allows two applications to interact with each other.
+                        </li>
+                        <li><strong>Candidate: </strong> 
+                            User sitting for an assessment.
+                        </li>
+                        <li><strong>Database: </strong> 
+                            Collection of all the information monitored by this system.
+                        </li>
+                        <li><strong>Evaluator: </strong> 
+                            User who created an exam cohort.
+                        </li>
+                        <li><strong>Exam-Cohort: </strong> 
+                            Virtual platform for creating one or more assessment.
+                        </li>
+                        <li><strong>Framework: </strong> 
+                            An abstraction in which software, providing generic functionality, can be selectively changed by additional user-written code, thus providing application-specific software.
+                        </li>
+                        <li><strong>HTTP: </strong> 
+                            HyperText Transfer Protocol in full, a standard application-level protocol used for exchanging files on the World Wide Web.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="information">
+                <div class="heading fs-4 h2 my-3">Appendix B: Analysis Models</div>
+                <div class="details">
+                    Not Available Currently
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

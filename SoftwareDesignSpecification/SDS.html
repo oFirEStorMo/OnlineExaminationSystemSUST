@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SDS</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      .information {
+        page-break-inside: avoid;
+      }
+
+      .item {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .description {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .description:after {
+        content: "..............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................";
+      }
+
+      .page-number {
+        flex-shrink: 0;
+      }
+
+      hr {
+        height: 4px !important;
+        background-color: black;
+        opacity: 100;
+        border: none;
+        border-top: solid 4px #000 !important;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      td {
+         padding: 2% 2% 2% 2%;
+      }
+      .sidenav {
+        height: 100%;
+        width: 24%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: rgb(0, 0, 0);
+        overflow-x: hidden;
+        padding-top: 2%;
+      }
+      header{
+        display: none;
+      }
+      @media print {
+        .sidenav {
+          display: none;
+        }
+        .main {
+          display: inline;
+        }
+        header{
+          display: block !important;
+        }
+      }
+
+      @media screen and (max-height: 450px) {
+        .sidenav {
+          padding-top: 15px;
+        }
+        .sidenav a {
+          font-size: 18px;
+        }
+      }
+
+      .sidenav a {
+        padding: 1% 4% 3% 8%;
+        text-decoration: none;
+        font-size: 100%;
+        color: #818181;
+        display: block;
+      }
+
+      .sidenav a:hover {
+        color: #f1f1f1;
+      }
+
+      .main {
+        margin-left: 34%;
+        margin-right: 10%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+      }
+      .subnav {
+        margin-left: 5% !important;
+        font-size: 90% !important;
+      }
+    </style>
+  </head>
+  <body style="background-color: rgb(220, 220, 220)">
+    <div class="sidenav">
+      <a style="font-size: 110%" href="#"
+        >Software Design Specification</a
+      >
+      <a href="#1">1. Introduction</a>
+      <div class="subnav">
+        <a href="#1.1">1.1 Purpose</a>
+        <a href="#1.2">1.2 Document Conventions</a>
+        <a href="#1.3">1.3 Intended Audience</a>
+      </div>
+      <a href="#2">2. Architectural Design</a>
+      <div class="subnav">
+        <a href="#2.1">2.1 Description of Design Components</a>
+        <a href="#2.2">2.2 High-Level Component Design</a>
+      </div>
+      <a href="#3">3. Class Diagrams</a>
+      <div class="subnav">
+        <a href="#3.1">3.1 Detailed Class Diagram</a>
+        <a href="#3.2">3.2 Detailed Class Description</a>
+      </div>
+      <a href="#4">4. Database Design</a>
+      <div class="subnav">
+        <a href="#4.1">4.1 ER Diagram</a>
+        <a href="#4.2">4.2 ER Description</a>
+      </div>
+      <a href="#5">5. Implementation Plan</a>
+    </div>
+
+    <div class="main">
+          <div>
+            <hr class="mt-5"></hr>
+                <div class="row mt-4">
+                    <div align="right">
+                        <h2>Software Design<br>Specification</h2>
+                    </div>
+                    <div align="right">
+                        <h4>for</h4>
+                    </div>
+                    <div align="right">
+                        <h2>Online Examination System</h2><br><br>
+                    </div>
+                    <div align="right">
+                        <h5>Version 1.0 approved</h5><br><br>
+                    </div>
+                    <div align="right">
+                        <h5>Prepared By-</h5>
+                    </div>
+                    <div align="right">
+                      <h5>BM Monjur Morshed</h5>
+                  </div>
+                  <div align="right">
+                      <h5>Md. Abdullah Al Mahmud</h5>
+                  </div>
+                  <div align="right">
+                      <h5>Arman Sykot</h5><br><br>
+                  </div>
+                  <div align="right">
+                      <h5>North South University</h5><br><br>
+                  </div>
+                  <div align="right">
+                      <h5>26-01-2023</h5>
+                  </div>
+                </div>
+          </div> 
+         <p style="page-break-before:always"></p>
+         <div>
+              <header align="right" style="font-size: 10px">Page ii</header><br>
+              <p class="fw-bold" style="font-size: 18px">Table of Contents</p><br>
+              <div class="item" >
+                  <div class="description fw-bold">Table of Contents</div>
+                  <div class="page-number fw-bold">ii</div>
+              </div>
+              <div>
+                  <div class="item">
+                      <div class="description fw-bold">1.&nbsp;&nbsp;Introduction</div>
+                      <div class="page-number fw-bold">1</div>
+                  </div>
+                  <div class="item">
+                      <div class="description ms-4">1.1&nbsp;&nbsp;Purpose</div>
+                      <div class="page-number">1</div>
+                  </div>
+                  <div class="item">
+                      <div class="description ms-4">1.2&nbsp;&nbsp;Document Conventions</div>
+                      <div class="page-number">1</div>
+                  </div>
+                  <div class="item">
+                      <div class="description ms-4">1.3&nbsp;&nbsp;Intended Audience</div>
+                      <div class="page-number">1</div>
+                  </div>
+              </div>
+              <div>
+                  <div class="item">
+                    <div class="description fw-bold">2.&nbsp;&nbsp;Architectural Design</div>
+                    <div class="page-number fw-bold">1</div>
+                  </div>
+                  <div class="item">
+                    <div class="description ms-4">2.1&nbsp;&nbsp;Description of Design Components</div>
+                    <div class="page-number">1</div>
+                  </div>
+                  <div class="item">
+                    <div class="description ms-4">2.2&nbsp;&nbsp;High-Level Component Design</div>
+                    <div class="page-number">2</div>
+                  </div>
+              </div>
+              <div>
+                <div class="item">
+                  <div class="description fw-bold">3.&nbsp;&nbsp;Class Diagrams</div>
+                  <div class="page-number fw-bold">3</div>
+                </div>
+                <div class="item">
+                  <div class="description ms-4">3.1&nbsp;&nbsp;Detailed Class Diagram</div>
+                  <div class="page-number">3</div>
+                </div>
+                <div class="item">
+                  <div class="description ms-4">3.2&nbsp;&nbsp;Detailed Class Description</div>
+                  <div class="page-number">4</div>
+                </div>
+              </div>
+              <div>
+                <div class="item">
+                  <div class="description fw-bold">4.&nbsp;&nbsp;Database Design</div>
+                  <div class="page-number fw-bold">8</div>
+                </div>
+                <div class="item">
+                  <div class="description ms-4">4.1&nbsp;&nbsp;ER Diagram</div>
+                  <div class="page-number">8</div>
+                </div>
+                <div class="item">
+                  <div class="description ms-4">4.2&nbsp;&nbsp;ER Description</div>
+                  <div class="page-number">9</div>
+                </div>
+              </div>
+              <div>
+                <div class="item">
+                  <div class="description fw-bold">5.&nbsp;&nbsp;Implementation Plan</div>
+                  <div class="page-number fw-bold">14</div>
+                </div>
+              </div>
+         </div>
+         <p style="page-break-before:always"></p>
+         <header align="right" style="font-size: 10px">Page 1</header><br>
+         <div id="1">
+            <h2 class="my-4">1. Introduction</h2>
+            <div class="information">
+                <div id="1.1" class="heading fs-4 h2 my-3">
+                  1.1 Purpose
+                </div>
+                <div class="details">
+                  The main purpose of SDS is to break down the project into components to describe in detail what the purpose of each component is and how it will be implemented. The SDS will also serve as a tool for verification and validation of the final product. This will help to ensure that the final product meets the requirements of the end customer, i.e. functions as expected, is reliable, is easy to use, does not demand inordinate efforts to train staff in its use, etc. This document will deliver a detailed description of the software components and subsystems to be provided as part of the product.
+                </div>
+            </div>
+            <div class="information">
+                <div id="1.2" class="heading fs-4 h2 my-3">
+                  1.2 Document Conventions
+                </div>
+                <div class="details">
+                  <strong>Heading:</strong> Font Style: Bold, Font Size: 18<br>
+                  <strong>Sub Heading:</strong> Font Style: Bold, Font Size: 14<br>
+                  <strong>Explanations:</strong> Font Style: Normal, Font Size: 12
+                </div>
+            </div>
+            <div class="information">
+                <div id="1.3" class="heading fs-4 h2 my-3">
+                    1.3 Intended Audience
+                </div>
+                <div class="details">
+                    This document is a prototype for an Online Examination System. This document is intended for the project manager, project team, and development team and any person reasonably skilled in software design, analysis or programming to maintain and further develop the Software.
+                </div>
+            </div>
+          </div>
+          <div id="2">
+               <h2 class="my-4">2. Architectural Design</h2>
+               <div class="information">
+                    <div id="2.1" class="heading fs-4 h2 my-3">
+                        2.1 Description of Design Components
+                    </div>
+                    <div class="details">
+                      This section will provide an outline of the various components and subsystems of the Online Examination System.
+                        <div><br>
+                          <p class="fw-bold d-inline">Server Side</p>
+                        </div>
+                        <div>
+                          <ul>
+                            <li>
+                              <strong>Web Server</strong><br>Web servers are used to execute server-side scripting. They are basically used to create dynamic pages. It can also access the file system residing at the webserver. A server-side environment that runs on a scripting language is a web server.
+                            </li>
+                          </ul>
+                        </div>
+                        <p style="page-break-before:always"></p>
+                        <header align="right" style="font-size: 10px">Page 2</header><br>
+                        <div>
+                          <p class="fw-bold d-inline">Client Side</p>
+                        </div>
+                        <div>
+                          <ul>
+                            <li>
+                              <strong>Web Browser</strong><br>Web browsers execute client-side scripting. It is used when browsers have all the code. Source code is used to transfer from the web server to the user's computer over the internet and run directly on browsers. It is also used for validations and functionality for user events.
+                            </li>
+                            <li>
+                              <strong>Django Web Framework</strong><br>Django is an extremely popular and fully featured server-side web framework, written in Python. It encourages rapid development and clean, pragmatic design. The backend of the software is built using this framework.
+                            </li>
+                          </ul>
+                        </div>
+                        <div>
+                          <p class="fw-bold d-inline">Database</p>
+                        </div>
+                        <div>
+                          <ul>
+                            <li>
+                              <strong>MySQL</strong><br>MySQL is an open-source relational database management system (RDBMS). works with an operating system to implement a relational database in a computer's storage system, manages users, allows for network access and facilitates testing database integrity and creation of backups. The data of this system will be stored in this DBMS.
+                            </li>
+                          </ul>
+                        </div>
+                     </div>
+                    <div id="2.2" class="heading fs-4 h2 my-3">
+                        2.2 High-Level Component Design
+                    </div>
+                    <div class="details">
+                        Component level design is the definition and design of components and modules after the architectural design phase. Component-level design defines the data structures, algorithms, interface characteristics, and communication mechanisms allocated to each component for the system development. Component level design includes the following actions:
+                        <ul><br>
+                          <li>
+                            <strong>Identify Design Classes in Problem Domain</strong><br>Most classes from the problem domain are analysis classes created as part of the analysis model.
+                          </li><br>
+                          <li>
+                            <strong>Identify Infrastructure Design Classes</strong><br>The infrastructure design classes are introduced as components during architectural design.
+                          </li><br>
+                          <li>
+                            <strong>Elaborate Design Classes</strong><br>
+                            <ul>
+                              <li>
+                                Specify message details when classes or components collaborate
+                              </li>
+                              <li>
+                                Identify appropriate interfaces for each component
+                              </li>
+                              <li>
+                                Elaborate attributes
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                    </div>
+               </div>
+          </div>
+          <div id="3">
+            <div class="information">
+              <p style="page-break-before:auto"></p>
+              <header align="right" style="font-size: 10px">Page 3</header><br>
+              <h2 class="my-4">3. Class Diagram</h2>
+                 <div id="3.1" class="heading fs-4 h2 my-3">
+                     3.1 Detailed Class Diagram(s)
+                 </div>
+                 <div class="details">
+                  <img
+                    src="./Class_Diagram.png"
+                    alt="Class Diagram"
+                    width="100%"
+                  />
+                  <p style="page-break-before:always"></p>
+                  <header align="right" style="font-size: 10px">Page 4</header><br>  
+                 <div id="3.2" class="heading fs-4 h2 my-3">
+                     3.2 Detailed Class Description(s)
+                 </div>
+                 <div class="details">
+                  <div class="fs-5"><strong>Class name: </strong>Users</div>
+                  <div class="fs-5">
+                    <strong>Purpose: </strong>This class stores all the details as
+                    attributes of each user.
+                  </div>
+                  <div class="fs-5">
+                    <strong>Attributes: </strong><br />
+                    <ul>
+                      <li><strong>userId: </strong>It is an integer type data. It stores a unique ID given to each user account by which we can identify it.</li>
+                      <li><strong>name: </strong>It is a varchar type data. It stores the full name of the user.</li>
+                      <li><strong>email: </strong>It is a varchar type data. It stores the email address with which the user registered.</li>
+                    </ul>
+                  </div>
+                  <br/>
+                  <div class="fs-5"><strong>Class name: </strong>Evaluator</div>
+                  <div class="fs-5">
+                    <strong>Purpose: </strong>This class stores all the details as attributes of each evaluator.
+                  </div>
+                  <div class="fs-5">
+                    <strong>Attributes: </strong><br />
+                    <ul>
+                      <li><strong>evaluatorId: </strong>It is an integer type data. It stores a unique ID given to each evaluator by which we can identify the evaluator of an exam cohort.</li>
+                      <li><strong>userId: </strong>It is an integer type data. It stores the userId of the evaluator.</li>
+                      <li><strong>cohortId:</strong>It is an integer type data. It stores the cohortId which the evaluator created.</li>
+                    </ul>
+                  </div>
+                  <br/>
+                  <div class="fs-5"><strong>Class name: </strong>Candidate</div>
+                  <div class="fs-5">
+                    <strong>Purpose: </strong>This class stores all the details as attributes of each candidate.
+                  </div>
+                  <div class="fs-5">
+                    <strong>Attributes: </strong><br />
+                    <ul>
+                      <li><strong>candidateId: </strong>It is an integer type data. It stores a unique ID given to each candidate by which we can identify the candidate of an exam cohort.</li>
+                      <li><strong>userId: </strong>It is an integer type data. It stores the userId of the candidate.</li>
+                      <li><strong>cohortId: </strong>It is an integer type data. It stores the cohortId where the candidate joined.</li>
+                    </ul>
+                  </div>
+                  <br/>
+                  <p style="page-break-before:always"></p>
+                  <header align="right" style="font-size: 10px">Page 5</header><br>
+                  <div class="fs-5"><strong>Class name: </strong>ExamCohort</div>
+                  <div class="fs-5">
+                    <strong>Purpose: </strong>This class stores all the details as attributes of each Exam Cohort.
+                  </div>
+                  <div class="fs-5">
+                    <strong>Attributes: </strong><br />
+                    <ul>
+                      <li><strong>cohortId: </strong>It is an integer type data. It stores a unique ID for each Exam Cohort.</li>
+                      <li><strong>cohortName: </strong>It is a varchar type data. It stores the name of the Exam Cohort.</li>
+                    </ul>
+                  </div>
+                  <br/>
+                  <div class="fs-5"><strong>Class name: </strong>Assessment</div>
+                  <div class="fs-5">
+                    <strong>Purpose: </strong>This class stores all the details as attributes of each assessment in an Exam Cohort.
+                  </div>
+                  <div class="fs-5">
+                    <strong>Attributes: </strong><br />
+                    <ul>
+                      <li><strong>assessmentId: </strong>It is an integer type data. It stores a unique ID for each assessment.</li>
+                      <li><strong>assessmentName: </strong>It is a varchar type data. It stores the name of the assessment in an Exam Cohort.</li>
+                      <li><strong>cohortId:</strong>It is an integer type data. It stores the cohortId in which the assessment is created.</li>
+                      <li><strong>availableDateTime: </strong>It is a datetime type data. It stores the date and time when the assessment will be available to the candidates.</li>
+                      <li><strong>dueDateTime: </strong>It is a datetime type data. It stores the date and time when the assessment will be automatically submitted to the evaluator.</li>
+                    </ul>
+                  </div>
+                  <br/>
+                  <p style="page-break-before:always"></p>
+                  <header align="right" style="font-size: 10px">Page 6</header><br>
+                  <div class="fs-5"><strong>Class name: </strong>MCQ</div>
+                  <div class="fs-5">
+                    <strong>Purpose: </strong>This class stores all the details as attributes of each Multiple Choice Question in an assessment.
+                  </div>
+                  <div class="fs-5">
+                    <strong>Attributes: </strong><br />
+                    <ul>
+                      <li><strong>MCQId: </strong>It is an integer type data. It stores a unique ID for each mcq that is created by an evaluator.</li>
+                      <li><strong>assessmentId: </strong>It is an integer type data. It stores the assessmentId which holds the mcq question.</li>
+                      <li><strong>MCQQuestion: </strong>It is a varchar type data. It stores the mcq question of the assessment.</li>
+                      <li><strong>evaluatorsAnwer: </strong>It is a varchar type data. It stores the correct answer of each mcq question provided by the evaluator.</li>
+                      <li><strong>totalMarks: </strong>It is an integer type data. It stores the mark that a mcq question carries in an assessment.</li>
+                      <li><strong>totalTime: </strong>It is an integer type data. It stores the time allocated for answering a mcq question in an assessment.</li>
+                    </ul>
+                  </div>
+                  <br/>
+                  <div class="fs-5"><strong>Class name: </strong>MicroViva</div>
+                  <div class="fs-5">
+                    <strong>Purpose: </strong>This class stores all the details as attributes of each Micro-Viva Question in an assessment.
+                  </div>
+                  <div class="fs-5">
+                    <strong>Attributes: </strong><br />
+                    <ul>
+                      <li><strong>mvId: </strong>It is an integer type data. It stores a unique ID for each micro-viva that is created by an evaluator.</li>
+                      <li><strong>assessmentId: </strong>It is a varchar type data. It stores the micro-viva question of the assessment.</li>
+                      <li><strong>mvQuestionAudio: </strong>It is a varchar type data. It stores the recording of a micro viva question provided by the evaluator.</li>
+                      <li><strong>mvQuestionText: </strong>It is a varchar type data. It stores the text version of the recorded micro-viva question.</li>
+                      <li><strong>evaluatorsAnswerAudio: </strong>It is a varchar type data. It stores the recording of the correct answer to the micro viva question provided by the evaluator.</li>
+                      <p style="page-break-before:always"></p>
+                      <header align="right" style="font-size: 10px">Page 7</header><br>
+                      <li><strong>evaluatorsAnswerText: </strong>It is a varchar type data. It stores the text version of the recorded correct answer to the micro viva question provided by the evaluator.</li>
+                      <li><strong>totalMarks: </strong>It is an integer type data. It stores the mark that a micro-viva question carries in an assessment.</li>
+                      <li><strong>totalTime: </strong>It is an integer type data. It stores the time allocated for answering a micro-viva question in an assessment.</li>
+                    </ul>
+                  </div>
+                  <br/>
+                  <div class="fs-5"><strong>Class name: </strong>MCQSubmission</div>
+                  <div class="fs-5">
+                    <strong>Purpose: </strong>This class stores all the details as attributes of each submission of a Multiple Choice Question in an assessment.
+                  </div>
+                  <div class="fs-5">
+                    <strong>Attributes: </strong><br />
+                    <ul>
+                      <li><strong>MCQSubmissionId: </strong>It is an integer type data. It stores a unique ID for each submission of a mcq question.</li>
+                      <li><strong>MCQId: </strong>It is an integer type data. It stores the MCQId of the mcq question answer submitted by the candidate.</li>
+                      <li><strong>candidateId: </strong>It is an integer type data. It stores the unique Id of the candidate who did the submission.</li>
+                      <li><strong>choiceId: </strong>It is an integer type data. It stores the unique Id of the choice of an mcq.</li>
+                      <li><strong>obtainedMarks: </strong>It is an integer type data. It stores the mark that a candidate obtained in a mcq question.</li>
+                    </ul>
+                  </div>
+                  <br/>
+                  <div class="fs-5"><strong>Class name: </strong>MicroVivaSubmission</div>
+                  <div class="fs-5">
+                    <strong>Purpose: </strong>This class stores all the details as attributes of each submission of a Micro-Viva Question in an assessment.
+                  </div>
+                  <div class="fs-5">
+                    <strong>Attributes: </strong><br />
+                    <ul>
+                      <li><strong>MicroVivaSubmissionId: </strong>It is an integer type data. It stores a unique ID for each submission of a micro-viva question.</li>
+                      <li><strong>mvId: </strong>It is an integer type data. It stores the mvId of the micro-viva question answer submitted by the candidate.</li>
+                      <p style="page-break-before:always"></p>
+                      <header align="right" style="font-size: 10px">Page 8</header><br>
+                      <li><strong>candidateId:</strong>It is an integer type data. It stores the unique Id of the candidate who did the submission.</li>
+                      <li><strong>submittedAnswerAudio:</strong>It is a varchar type data. It stores the recording of the submitted answer of the candidate.</li>
+                      <li><strong>submittedAnswerText:</strong>It is a varchar type data. It stores the text version of the recorded answer of the candidate.</li>
+                      <li><strong>obtainedMarks:</strong>It is an integer type data. It stores the mark that a candidate obtained in a micro-viva question.</li>
+                    </ul>
+                  </div>
+                  <br/>
+                  <div class="fs-5"><strong>Class name: </strong>MCQChoice</div>
+                  <div class="fs-5">
+                    <strong>Purpose: </strong>This class stores all the details as attributes of each choice of a Multiple Choice Question in an assessment.
+                  </div>
+                  <div class="fs-5">
+                    <strong>Attributes: </strong><br />
+                    <ul>
+                      <li><strong>choiseId: </strong>It is an integer type data. It stores a unique ID for each choice of a mcq question.</li>
+                      <li><strong>MCQId: </strong>It is an integer type data. It stores the MCQId of the mcq question which holds the choice.</li>
+                      <li><strong>choice: </strong>It is a varchar type data. It stores a choice of an mcq question.</li>
+                    </ul>
+                  </div>
+                 </div>
+            </div>
+          </div>
+       </div>
+       <div id="4">
+        <div class="information">
+          <p style="page-break-before:auto"></p>
+          <header align="right" style="font-size: 10px">Page 8</header><br>
+          <h2 class="my-4">4. Database Design</h2>
+             <div id="4.1" class="heading fs-4 h2 my-3">
+                 4.1 ER Diagram
+             </div>
+             <div class="details">
+              <div style="margin-left: 10%;">
+                <img
+                  src="./ER_Diagram.png"
+                  alt="ER Diagram"
+                  width="90%"
+                  height="90%"
+                />
+              </div>
+              <p style="page-break-before:always"></p>
+              <header align="right" style="font-size: 10px">Page 9</header><br> 
+             <div id="4.2" class="heading fs-4 h2 my-3">
+                 4.2 ER Description
+             </div>
+             <div class="details">
+              <div class="fs-5"><strong>Table name: </strong>Users</div>
+              <div class="fs-5">
+                <strong>Purpose: </strong>This table stores all the details as
+                attributes of each user.
+              </div>
+              <div class="fs-5">
+                <strong>Attributes: </strong><br />
+                <ul>
+                  <li><strong>userId: </strong>It is an integer type data. It stores a unique ID given to each user account by which we can identify it. This is also the primary key for this table.</li>
+                  <li><strong>name: </strong>It is a varchar type data. It stores the full name of the user.</li>
+                  <li><strong>email: </strong>It is a varchar type data. It stores the email address with which the user registered.</li>
+                </ul>
+              </div>
+              <br/>
+              <div class="fs-5"><strong>Table name: </strong>Evaluator</div>
+              <div class="fs-5">
+                <strong>Purpose: </strong>This table stores all the details as attributes of each evaluator.
+              </div>
+              <div class="fs-5">
+                <strong>Attributes: </strong><br />
+                <ul>
+                  <li><strong>evaluatorId: </strong>It is an integer type data. It stores a unique ID given to each evaluator by which we can identify the evaluator of an exam cohort. This is also the primary key for this table.</li>
+                  <li><strong>userId: </strong>It is an integer type data. It stores the userId of the evaluator. It is a foreign key to this table from the User table.
+                  </li>
+                  <li><strong>cohortId:</strong>It is an integer type data. It stores the cohortId which the evaluator created. It is a foreign key to this table from the ExamCohort table.
+                  </li>
+                </ul>
+              </div>
+              <br/>
+              <div class="fs-5"><strong>Table name: </strong>Candidate</div>
+              <div class="fs-5">
+                <strong>Purpose: </strong>This table stores all the details as attributes of each candidate.
+              </div>
+              <div class="fs-5">
+                <strong>Attributes: </strong><br />
+                <ul>
+                  <li><strong>candidateId: </strong>It is an integer type data. It stores a unique ID given to each candidate by which we can identify the candidate of an exam cohort. This is also the primary key for this table.</li>
+                  <p style="page-break-before:always"></p>
+                  <header align="right" style="font-size: 10px">Page 10</header><br>
+                  <li><strong>userId: </strong>It is an integer type data. It stores the userId of the candidate. It is a foreign key to this table from the User table.
+                  </li>
+                  <li><strong>cohortId: </strong>It is an integer type data. It stores the cohortId where the candidate joined. It is a foreign key to this table from the ExamCohort table.
+                  </li>
+                </ul>
+              </div>
+              <br/>
+              <div class="fs-5"><strong>Table name: </strong>ExamCohort</div>
+              <div class="fs-5">
+                <strong>Purpose: </strong>This table stores all the details as attributes of each Exam Cohort.
+              </div>
+              <div class="fs-5">
+                <strong>Attributes: </strong><br />
+                <ul>
+                  <li><strong>cohortId: </strong>It is an integer type data. It stores a unique ID for each Exam Cohort.</li>
+                  <li><strong>cohortName: </strong>It is a varchar type data. It stores the name of the Exam Cohort.</li>
+                </ul>
+              </div>
+              <br/>
+              <div class="fs-5"><strong>Table name: </strong>Assessment</div>
+              <div class="fs-5">
+                <strong>Purpose: </strong>This table stores all the details as attributes of each assessment in an Exam Cohort.
+              </div>
+              <div class="fs-5">
+                <strong>Attributes: </strong><br />
+                <ul>
+                  <li><strong>assessmentId: </strong>It is an integer type data. It stores a unique ID for each assessment. This is also the primary key of this table.
+                  </li>
+                  <li><strong>assessmentName: </strong>It is a varchar type data. It stores the name of the assessment in an Exam Cohort.</li>
+                  <li><strong>cohortId:</strong>It is an integer type data. It stores the cohortId in which the assessment is created.  It is a foreign key to this table from the ExamCohort table.
+                  </li>
+                  <li><strong>availableDateTime: </strong>It is a datetime type data. It stores the date and time when the assessment will be available to the candidates.</li>
+                  <li><strong>dueDateTime: </strong>It is a datetime type data. It stores the date and time when the assessment will be automatically submitted to the evaluator.</li>
+                </ul>
+              </div>
+              <br/>
+              <p style="page-break-before:always"></p>
+              <header align="right" style="font-size: 10px">Page 11</header><br>
+              <div class="fs-5"><strong>Table name: </strong>MCQ</div>
+              <div class="fs-5">
+                <strong>Purpose: </strong>This table stores all the details as attributes of each Multiple Choice Question in an assessment.
+              </div>
+              <div class="fs-5">
+                <strong>Attributes: </strong><br />
+                <ul>
+                  <li><strong>MCQId: </strong>It is an integer type data. It stores a unique ID for each mcq that is created by an evaluator. This is also the primary key of this table.</li>
+                  <li><strong>assessmentId: </strong>It is an integer type data. It stores the assessmentId which holds the mcq question. It is a foreign key to this table from the Assessment table.</li>
+                  <li><strong>MCQQuestion: </strong>It is a varchar type data. It stores the mcq question of the assessment.</li>
+                  <li><strong>evaluatorsAnwer: </strong>It is a varchar type data. It stores the correct answer of each mcq question provided by the evaluator.</li>
+                  <li><strong>totalMarks: </strong>It is an integer type data. It stores the mark that a mcq question carries in an assessment.</li>
+                  <li><strong>totalTime: </strong>It is an integer type data. It stores the time allocated for answering a mcq question in an assessment.</li>
+                </ul>
+              </div>
+              <br/>
+              <div class="fs-5"><strong>Table name: </strong>MicroViva</div>
+              <div class="fs-5">
+                <strong>Purpose: </strong>This table stores all the details as attributes of each Micro-Viva Question in an assessment.
+              </div>
+              <div class="fs-5">
+                <strong>Attributes: </strong><br />
+                <ul>
+                  <li><strong>mvId: </strong>It is an integer type data. It stores a unique ID for each micro-viva that is created by an evaluator. This is also the primary key of this table.</li>
+                  <li><strong>assessmentId: </strong>It is a varchar type data. It stores the micro-viva question of the assessment.  It is a foreign key to this table from the Assessment table.</li>
+                  <li><strong>mvQuestionAudio: </strong>It is a varchar type data. It stores the recording of a micro viva question provided by the evaluator.</li>
+                  <li><strong>mvQuestionText: </strong>It is a varchar type data. It stores the text version of the recorded micro-viva question.</li>
+                  <p style="page-break-before:always"></p>
+                  <header align="right" style="font-size: 10px">Page 12</header><br>
+                  <li><strong>evaluatorsAnswerAudio: </strong>It is a varchar type data. It stores the recording of the correct answer to the micro viva question provided by the evaluator.</li>
+                  <li><strong>evaluatorsAnswerText: </strong>It is a varchar type data. It stores the text version of the recorded correct answer to the micro viva question provided by the evaluator.</li>
+                  <li><strong>totalMarks: </strong>It is an integer type data. It stores the mark that a micro-viva question carries in an assessment.</li>
+                  <li><strong>totalTime: </strong>It is an integer type data. It stores the time allocated for answering a micro-viva question in an assessment.</li>
+                </ul>
+              </div>
+              <br/>
+              <div class="fs-5"><strong>Table name: </strong>MCQSubmission</div>
+              <div class="fs-5">
+                <strong>Purpose: </strong>This table stores all the details as attributes of each submission of a Multiple Choice Question in an assessment.
+              </div>
+              <div class="fs-5">
+                <strong>Attributes: </strong><br />
+                <ul>
+                  <li><strong>MCQSubmissionId: </strong>It is an integer type data. It stores a unique ID for each submission of a mcq question. This is also the primary key of this table.</li>
+                  <li><strong>MCQId: </strong>It is an integer type data. It stores the MCQId of the mcq question answer submitted by the candidate. It is a foreign key to this table from the MCQ table.</li>
+                  <li><strong>candidateId: </strong>It is an integer type data. It stores the unique Id of the candidate who did the submission.  It is a foreign key to this table from the Candidate table.</li>
+                  <li><strong>choiceId: </strong>It is an integer type data. It stores the unique Id of the choice of an mcq.  It is a foreign key to this table from the MCQChoice table.
+                  </li>
+                  <li><strong>obtainedMarks: </strong>It is an integer type data. It stores the mark that a candidate obtained in a mcq question.</li>
+                </ul>
+              </div>
+              <br/>
+              <p style="page-break-before:always"></p>
+              <header align="right" style="font-size: 10px">Page 13</header><br>
+              <div class="fs-5"><strong>Table name: </strong>MicroVivaSubmission</div>
+              <div class="fs-5">
+                <strong>Purpose: </strong>This table stores all the details as attributes of each submission of a Micro-Viva Question in an assessment.
+              </div>
+              <div class="fs-5">
+                <strong>Attributes: </strong><br />
+                <ul>
+                  <li><strong>MicroVivaSubmissionId: </strong>It is an integer type data. It stores a unique ID for each submission of a micro-viva question. This is also the primary key of this table.</li>
+                  <li><strong>mvId: </strong>It is an integer type data. It stores the mvId of the micro-viva question answer submitted by the candidate.  It is a foreign key to this table from the MicroViva table.</li>
+                  <li><strong>candidateId:</strong>It is an integer type data. It stores the unique Id of the candidate who did the submission.  It is a foreign key to this table from the Candidate table.</li>
+                  <li><strong>submittedAnswerAudio:</strong>It is a varchar type data. It stores the recording of the submitted answer of the candidate.</li>
+                  <li><strong>submittedAnswerText:</strong>It is a varchar type data. It stores the text version of the recorded answer of the candidate.</li>
+                  <li><strong>obtainedMarks:</strong>It is an integer type data. It stores the mark that a candidate obtained in a micro-viva question.</li>
+                </ul>
+              </div>
+              <br/>
+              <div class="fs-5"><strong>Table name: </strong>MCQChoice</div>
+              <div class="fs-5">
+                <strong>Purpose: </strong>This table stores all the details as attributes of each choice of a Multiple Choice Question in an assessment.
+              </div>
+              <div class="fs-5">
+                <strong>Attributes: </strong><br />
+                <ul>
+                  <li><strong>choiseId: </strong>It is an integer type data. It stores a unique ID for each choice of a mcq question. This is also the primary key of this table.</li>
+                  <li><strong>MCQId: </strong>It is an integer type data. It stores the MCQId of the mcq question which holds the choice.  It is a foreign key to this table from the MCQ table.
+                  </li>
+                  <li><strong>choice: </strong>It is a varchar type data. It stores a choice of an mcq question.</li>
+                </ul>
+              </div>
+             </div>
+        </div>
+      </div>
+    </div>
+    <p style="page-break-before:always"></p>
+    <header align="right" style="font-size: 10px">Page 14</header><br>
+    <div id="5">
+      <h2 class="my-4">5. Implementation Plan</h2>
+      <div class="information">
+        <div class="details">
+          <ul>
+            <li>Define goals</li>
+            <li>Conduct research</li>
+            <li>Map out risks</li>
+            <li>Schedule milestones</li>
+            <li>Assign tasks between group members</li>
+            <li>Unit testing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

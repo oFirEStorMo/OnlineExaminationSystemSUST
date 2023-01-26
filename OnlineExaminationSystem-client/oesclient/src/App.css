@@ -1,0 +1,192 @@
+:root {
+    --mainDark: #343a40;
+    --mainGrey: rgb(196, 196, 196);
+    --mainLightGrey: rgba(172, 172, 172);
+    --mainWhite: #fff;
+    --mainBlue: #007bff;
+    --mainOrange: #ff7363;
+    --header-height: 3rem;
+    --nav-width: 240px;
+    --first-color: #f10086;
+    --first-color-alt: #f582a7;
+}
+
+.nav-color {
+    background-color: #ff7363 !important; 
+}
+
+.logo-bg {
+    background-color: black !important;
+}
+
+.button-type {
+    background-color: #ff7363 !important;
+    border-radius: 100% !important;
+    border-color: #ff7363 !important;
+}
+
+.button-style {
+    background-color: #ff7363 !important;
+    border-color: #ff7363 !important; 
+}
+
+.sticky-md-top{
+    margin-top:  2% !important;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-inner {
+    position: relative;
+    padding: 32px;
+    width: 100%;
+    max-width: 680px;
+    background-color: #fff;
+}
+
+.popup-inner .close-btn {
+    position: absolute;
+    border-radius: 100%;
+    top: 16px;
+    right: 16px;
+}
+
+.sidebar {
+   height: 100%;
+   width: 250px;
+   background-color: #fff;
+}
+
+.first-division button {
+   color: rgba(0, 89, 255, 0.986);
+   border: 1px solid rgb(0, 89, 255, 0.986);
+}
+  
+.second-division button {
+   color: red;
+   border: 1px solid red;
+}
+
+table {
+    border-collapse: collapse;
+    max-width: 900px;
+    width: 100%;
+    margin: 2rem auto;
+  }
+  table th, table td {
+    border: 1px solid rgb(6, 6, 6);
+    padding: 8px;
+  }
+
+  .text-decor{
+    text-decoration: none !important
+  }
+
+  .mcq-card {
+    margin: 0 auto;
+
+    background-color: gray;
+    padding: 16px;
+    border-radius: 16px;
+    color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px rgb(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    width: 80%;
+    height: auto;
+
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  .li-style {
+    background-color: darkgray;
+    padding: 16px;
+    border: 3px solid white;
+    border-radius: 20px;
+    font-size: 20px;
+    margin-top: 8px;
+  }
+
+  .mcq-text {
+    font-size: 24px;
+  }
+
+  .mv-card {
+    margin: 0 auto;
+
+    background-color: gray;
+    padding: 16px;
+    border-radius: 16px;
+    color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px rgb(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    width: 80%;
+    height: auto;
+  }
+
+  .mv-text {
+    font-size: 24px;
+  }
+
+  .progress-bar{
+    height: 20vh;
+    width: 20vh;
+    background: none;
+  }
+
+  .center {
+    margin: auto;
+    width: 20vh;
+  }
+  .center-text{
+    padding-top: 20vh;
+    padding-bottom: 5vh;
+    text-align: center;
+    color: #ff7363;
+  }
+
+  .center-headings{
+    padding-top: 10vh;
+    padding-bottom: 5vh;
+    text-align: center;
+    color: #ff7363;
+  }
+
+  .center-form{
+    margin: auto;
+    width: 100vh;
+  }
+
+  .time-color{
+    color: #ff7363;
+    font: bold;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  
+  .score {
+    color: green;
+    
+  }
+  
+  .progress-style {
+    width: 20vh;
+    margin: auto;
+  }
+
+  .grade-info {
+    margin: auto;
+    width: 100vh;
+    text-align: center;
+  }
