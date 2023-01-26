@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'oes',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': '123123',
         'PORT': '3306',
     }
 }
