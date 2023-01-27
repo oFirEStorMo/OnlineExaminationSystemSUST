@@ -12,6 +12,7 @@ import Header from "../Header";
 import Popup from "../Popup";
 import Recorder from "../Recorder";
 import Countdown from "../Countdown";
+import CreateGroup from "../CreateGroup";
 import { useEffect, useState, useMemo } from "react";
 import { isAccordionItemSelected } from "react-bootstrap/esm/AccordionContext";
 import { useParams } from "react-router-dom";
@@ -104,6 +105,7 @@ function PublishAssessment() {
       axios
         .post(API_URLS["get_all_question"], data, { withCredentials: true })
         .then((response) => {
+          console.log(response.data)
           setMcqList(response.data.mcqList);
           setMvList(response.data.mvList);
         });
@@ -292,7 +294,7 @@ function PublishAssessment() {
           )}
         </Formik>
         <div className="py-2">
-          <div>MCQ Questions</div>
+          <div>Single Questions</div>
           <ListGroup as="ol">
             {mcqList.map((mcq) => (
               <Row key={mcq.id}>
@@ -314,11 +316,13 @@ function PublishAssessment() {
             ))}
           </ListGroup>
           <div className="py-2">
-            <CreateMCQ id={id} assessmentId={assessmentId} />
+            <CreateGroup assessmentId={assessmentId} id={id} />
+            {/* <CreateMCQ id={id} assessmentId={assessmentId} /> */}
           </div>
+          
         </div>
         <div className="py-2">
-          <div>Micro Viva Questions</div>
+          <div>Group Questions</div>
           <ListGroup as="ol">
             {mvList.map((mv, index) => (
               <Row key={mv.id}>

@@ -32,77 +32,77 @@ import CreateGroup from "./components/CreateGroup";
 
 function App() {
   return (
-    // <Router>
-    //   <Routes>
-    //     <Route
-    //       path="/"
-    //       element={
-    //         <PublicRoute>
-    //           <Home />
-    //         </PublicRoute>
-    //       }
-    //     />
-    //     <Route
-    //       path="dashboard"
-    //       element={
-    //         <AuthRoute>
-    //           <ExamCohort />
-    //         </AuthRoute>
-    //       }
-    //     />
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <PublicRoute>
+              <Home />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="dashboard"
+          element={
+            <AuthRoute>
+              <ExamCohort />
+            </AuthRoute>
+          }
+        />
 
-    //     <Route
-    //       path="dashboard/:id"
-    //       element={
-    //         <AuthRoute>
-    //           <Assessment isEvaluator={true} />
-    //         </AuthRoute>
-    //       }
-    //     />
-    //     <Route
-    //       path="dashboard/view/:id"
-    //       element={
-    //         <AuthRoute>
-    //           <Assessment isEvaluator={false} />
-    //         </AuthRoute>
-    //       }
-    //     />
-    //     <Route
-    //       path="dashboard/view/:id/:assessmentId"
-    //       element={
-    //         <AuthRoute>
-    //           <ExamScreen isEvaluator={false} />
-    //         </AuthRoute>
-    //       }
-    //     />
-    //     <Route
-    //       path="dashboard/:id/create"
-    //       element={
-    //         <AuthRoute>
-    //           <CreateAssessment />
-    //         </AuthRoute>
-    //       }
-    //     />
-    //     <Route
-    //       path="dashboard/:id/:assessmentId"
-    //       element={
-    //         <AuthRoute>
-    //           <AssessmentScreen />
-    //         </AuthRoute>
-    //       }
-    //     />
-    //     <Route
-    //       path="dashboard/:id/:assessmentId/:candidateId"
-    //       element={
-    //         <AuthRoute>
-    //           <EditMarks />
-    //         </AuthRoute>
-    //       }
-    //     />
-    //     <Route path="*" element={<Navigate to="/" />} />
-    //   </Routes>
-    // </Router>
-    <CreateGroup assessmentId={2} id={1} />
+        <Route
+          path="dashboard/:id"
+          element={
+            <AuthRoute>
+              <Assessment isEvaluator={true} />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="dashboard/view/:id"
+          element={
+            <AuthRoute>
+              <Assessment isEvaluator={false} />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="dashboard/view/:id/:assessmentId"
+          element={
+            <AuthRoute>
+              <ExamScreen isEvaluator={false} />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="dashboard/:id/create"
+          element={
+            <AuthRoute>
+              <CreateAssessment />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="dashboard/:id/:assessmentId"
+          element={
+            <AuthRoute>
+              <AssessmentScreen />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="dashboard/:id/:assessmentId/:candidateId"
+          element={
+            <AuthRoute>
+              <EditMarks />
+            </AuthRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Router>
+    
   );
 }
 
