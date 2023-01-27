@@ -30,6 +30,11 @@ class EvaluatorSerializer(serializers.ModelSerializer):
 
 # Serializes every fields of Candidate model
 
+class UserAndGroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserAndGroup
+        fields = '__all__'
+
 
 class CandidateSerializer(serializers.ModelSerializer):
     class Meta:

@@ -111,7 +111,7 @@ class QuestionGroup(models.Model):
 
 
 class UserAndGroup(models.Model):
-    user = model.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     group = models.ForeignKey(QuestionGroup, on_delete=models.CASCADE)
 
 # Stores data of a MCQ question within an Assessment
