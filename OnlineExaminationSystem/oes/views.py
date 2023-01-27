@@ -699,8 +699,12 @@ class GetQuestionView(APIView):
             print(data)
             return Response(data=data, status=status.HTTP_200_OK)
 
+        group_list = QuestionGroup.objects.filter(
+            assessment__id=request.data['assessmentId'])
+        group_id = group_list[randint(0, group_list.count()-1)]['id']
+
         mcqList = list(MCQ.objects.filter(
-            ~Q(mcqsubmission__candidate__id=payload['candidateId']), mcqsubmission__isSubmitted=1, assessment__id=request.data['assessmentId']).values('id', 'MCQQuestion'))
+            ~Q(mcqsubmission__candidate__id=payload['candidateId']), assessment__id=request.data['assessmentId']).values('id', 'MCQQuestion'))
         mvList = list(MicroViva.objects.filter(
             ~Q(microvivasubmission__candidate__id=payload['candidateId']), assessment__id=request.data['assessmentId']).values('id'))
         questionList = mcqList+mvList
@@ -988,9 +992,9 @@ class GetQuestionListView(APIView):
         if not Assessment.objects.filter(examCohort__id=request.data['id']).exists():
             raise AuthenticationFailed('Unauthorized')
         mcqList = list(MCQ.objects.filter(
-            assessment__id=request.data['assessmentId']).values('id', 'MCQQuestion'))
+            assessment__id=request.data['assessmentId']).values('id', 'MCQQuestion', 'questionGroup'))
         mvList = list(MicroViva.objects.filter(
-            assessment__id=request.data['assessmentId']).values('id'))
+            assessment__id=request.data['assessmentId']).values('id', 'questionGroup'))
 
         return Response(data={"mcqList": mcqList, "mvList": mvList})
 
