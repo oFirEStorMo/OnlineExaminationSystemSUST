@@ -14,7 +14,7 @@ import axios from "axios";
 import API_URLS from "../API_URLS.json";
 import Modal from "react-bootstrap/Modal";
 
-function CreateMV({ id, assessmentId }) {
+function CreateMV({ id, assessmentId, groupId }) {
   const [buttonViewPopup, setButtonViewPopup] = useState(false);
   const [audioURL1, setAudioURL1] = useState(new Blob());
   const [audioURL2, setAudioURL2] = useState(new Blob());
@@ -34,6 +34,7 @@ function CreateMV({ id, assessmentId }) {
     const submitData = async () => {
       console.log(audioURL1);
       let submissionData = new FormData();
+      submissionData.append("questionGroup", groupId);
       submissionData.append("assessmentId", assessmentId);
       submissionData.append("time", data.time);
       submissionData.append("mvMarks", data.mark);

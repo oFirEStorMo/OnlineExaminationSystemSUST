@@ -105,10 +105,16 @@ class Assessment(models.Model):
     isPublished = models.BooleanField(default=False)
 
 
+class QuestionGroup(models.Model):
+    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+
 # Stores data of a MCQ question within an Assessment
 
 
 class MCQ(models.Model):
+
+    questionGroup = models.ForeignKey(QuestionGroup, on_delete=models.CASCADE)
 
     assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE)
 
@@ -124,6 +130,8 @@ class MCQ(models.Model):
 
 
 class MicroViva(models.Model):
+
+    questionGroup = models.ForeignKey(QuestionGroup, on_delete=models.CASCADE)
 
     assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE)
 

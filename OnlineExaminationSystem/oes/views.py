@@ -528,6 +528,7 @@ class CreateMCQView(APIView):
         if request.data['correctAnswer'] not in request.data['choiceList']:
             raise NotAcceptable(detail='Invalid correct answer')
         mcqData = {
+            'questionGroup': request.data['questionGroup'],
             'assessment': request.data['assessmentId'],
             'MCQQuestion': request.data['mcqQuestion'],
             'evaluatorsAnswer': request.data['correctAnswer'],
@@ -557,6 +558,7 @@ class CreateMicroVivaView(APIView):
             request.data['id'] = cohort.pk
             authorizeEvaluator(request)
             data = {
+                'questionGroup': request.data['questionGroup'],
                 'assessment': request.data['assessmentId'],
                 'mvQuestionAudio': request.data['mvQuestionAudio'],
                 'evaluatorsAnswerAudio': request.data['evaluatorsAnswerAudio'],
@@ -664,6 +666,20 @@ class CandidateView(APIView):
         queryset = User.objects.filter(candidate__examCohort=examCohort)
 
         return Response(data=queryset.values('id', 'name', 'email'), status=status.HTTP_200_OK)
+
+
+class CreateQuestionGroupView(APIView):
+    def post(self, request):
+        print(request.data)
+        payload = authorizeEvaluator(request)
+        data = {
+            'name': request.data['name'],
+            'assessment': request.data['assessment']
+        }
+        serializer = QuestionGroupSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
 
 
 class GetQuestionView(APIView):

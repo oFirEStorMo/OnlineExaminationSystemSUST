@@ -22,6 +22,7 @@ urlpatterns = [
     path('assessment/create', CreateAssessmentView.as_view()),
     # Path for Assessment View
     path('assessment', AssessmentView.as_view()),
+    path('assessment/group/create', CreateQuestionGroupView().as_view()),
     path('assessment/candidate', AssessmentCandidateView.as_view()),
     path('assessment/get', SingleAssessmentView.as_view()),
     path('assessment/candidate/get', SingleAssessmentCandidateView.as_view()),

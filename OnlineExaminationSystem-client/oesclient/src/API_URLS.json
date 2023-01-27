@@ -30,6 +30,7 @@
     "get_submission" : "http://localhost:8000/api/submission",
     "get_audio" : "http://localhost:8000/api/audio",
     "update_mcq" : "http://localhost:8000/api/update/mcq",
-    "update_mv" : "http://localhost:8000/api/update/mv"
+    "update_mv" : "http://localhost:8000/api/update/mv",
+    "create_group": "http://localhost:8000/api/assessment/group/create"
     
 }

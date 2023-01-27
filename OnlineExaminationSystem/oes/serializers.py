@@ -89,3 +89,10 @@ class MicroVivaSubmissionSerializer(serializers.ModelSerializer):
         model = MicroVivaSubmission
         read_only_fields = ['id']
         fields = '__all__'
+
+
+class QuestionGroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = QuestionGroup
+        read_only_fields = ['id']
+        fields = '__all__'

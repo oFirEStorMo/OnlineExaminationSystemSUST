@@ -7,12 +7,13 @@ import axios from "axios";
 import API_URLS from "../../API_URLS.json";
 import { useNavigate } from "react-router-dom";
 
-function CreateMCQ({ id, assessmentId }) {
+function CreateMCQ({ id, assessmentId, groupId }) {
   const [buttonPopup, setButtonPopup] = useState(false);
 
   const handleFormSubmit = (data) => {
     const submitData = async () => {
       let submissionData = {
+        questionGroup: groupId,
         assessmentId: assessmentId,
         mcqQuestion: data.mcqQuestion,
         choiceList: data.mcqChoice,
@@ -55,6 +56,7 @@ function CreateMCQ({ id, assessmentId }) {
   };
   return (
     <div>
+      {console.log(groupId)}
       <Button onClick={() => setButtonPopup(true)} variant="outline-success">
         Add MCQ
       </Button>
@@ -71,7 +73,7 @@ function CreateMCQ({ id, assessmentId }) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Add new Micro Viva
+            Add new MCQ
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
