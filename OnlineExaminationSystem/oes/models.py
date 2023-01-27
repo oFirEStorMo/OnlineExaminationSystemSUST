@@ -109,6 +109,11 @@ class QuestionGroup(models.Model):
     assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
+
+class UserAndGroup(models.Model):
+    user = model.ForeignKey(User, on_delete=models.CASCADE)
+    group = models.ForeignKey(QuestionGroup, on_delete=models.CASCADE)
+
 # Stores data of a MCQ question within an Assessment
 
 
@@ -181,6 +186,8 @@ class MCQSubmission(models.Model):
 
     isSubmitted = models.BooleanField(default=False)
 
+    submittedAt = models.DateTimeField(auto_now=True)
+
 
 # Stores data of a Micro-Viva question's submission
 
@@ -204,3 +211,5 @@ class MicroVivaSubmission(models.Model):
     submissionEndTime = models.DateTimeField()
 
     isSubmitted = models.BooleanField(default=False)
+
+    submittedAt = models.DateTimeField(auto_now=True)
