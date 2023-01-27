@@ -9,9 +9,10 @@ import { useNavigate } from "react-router-dom";
 
 function CreateMCQ({ id, assessmentId, groupId }) {
   const [buttonPopup, setButtonPopup] = useState(false);
-
+  console.log(groupId)
   const handleFormSubmit = (data) => {
     const submitData = async () => {
+      
       let submissionData = {
         questionGroup: groupId,
         assessmentId: assessmentId,

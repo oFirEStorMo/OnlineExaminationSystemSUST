@@ -37,6 +37,9 @@ function PublishAssessment() {
   const [mcqList, setMcqList] = useState([]);
   const [mvList, setMvList] = useState([]);
 
+  const [singleQuestionList, setSingleQuestionList] = useState([]);
+  const [multipleQuestionList, setMultipleQuestionList] = useState([]);
+
   const schema = Yup.object().shape({
     assessmentName: Yup.string()
       .max(32, "At max 32 characters")
@@ -95,7 +98,7 @@ function PublishAssessment() {
     fetchAssessment();
   }, []);
 
-  useMemo(() => {
+  useEffect(() => {
     const fetchQuestions = async () => {
       console.log("here");
       const data = {
@@ -106,12 +109,46 @@ function PublishAssessment() {
         .post(API_URLS["get_all_question"], data, { withCredentials: true })
         .then((response) => {
           console.log(response.data)
-          setMcqList(response.data.mcqList);
-          setMvList(response.data.mvList);
+          let groupList = {};
+          for (let index = 0; index < response.data.mcqList.length; index++) {
+            const element = response.data.mcqList[index];
+            if (!groupList[element.questionGroup]) {
+              groupList[element.questionGroup] = [];
+            }
+            groupList[element.questionGroup].push(element);   
+          }
+
+          for (let index = 0; index < response.data.mvList.length; index++) {
+            const element = response.data.mvList[index];
+            if (!groupList[element.questionGroup]) {
+              groupList[element.questionGroup] = [];
+            }
+            groupList[element.questionGroup].push(element);
+          }
+
+          let tempSingleList = [];
+          let tempMultipleList = [];
+
+          for (const key in groupList) {
+            if (Object.hasOwnProperty.call(groupList, key)) {
+              const element = groupList[key];
+              if (element.length === 1) {
+                tempSingleList.push(element[0]);
+              }
+              if (element.length > 1) {
+                tempMultipleList.push(element);
+              }
+            }
+          }
+
+          console.log(groupList);
+          setSingleQuestionList(tempSingleList);
+          setMultipleQuestionList(tempMultipleList);
+          console.log(tempMultipleList)
         });
     };
     fetchQuestions();
-  }, [deleteCount]);
+  }, []);
 
   const convertTimezone = (dateTime) => {
     let date = new Date();
@@ -296,7 +333,7 @@ function PublishAssessment() {
         <div className="py-2">
           <div>Single Questions</div>
           <ListGroup as="ol">
-            {mcqList.map((mcq) => (
+            {singleQuestionList.map((mcq) => (
               <Row key={mcq.id}>
                 <Col>
                   <ListGroup.Item as="li">{mcq.MCQQuestion}</ListGroup.Item>
@@ -324,27 +361,32 @@ function PublishAssessment() {
         <div className="py-2">
           <div>Group Questions</div>
           <ListGroup as="ol">
-            {mvList.map((mv, index) => (
-              <Row key={mv.id}>
-                <Col>
-                  <ListGroup.Item as="li">{`Question ${
-                    index + 1
-                  }`}</ListGroup.Item>
-                </Col>
-                <Col>
-                  <div className="pt-1">
-                    <Button
-                      variant="outline-danger"
-                      onClick={(event) => handleDeleteMCQ(mv)}
-                    >
-                      {" "}
-                      Delete{" "}
-                    </Button>
-                  </div>
-                </Col>
-              </Row>
-            ))}
+            {multipleQuestionList[0].array.forEach(element => {
+              element.map((mv, index) => (
+                <Row key={mv.id}>
+                  <Col>
+                    <ListGroup.Item as="li">{`Question ${
+                      index + 1
+                    }`}</ListGroup.Item>
+                  </Col>
+                  <Col>
+                    <div className="pt-1">
+                      <Button
+                        variant="outline-danger"
+                        onClick={(event) => handleDeleteMCQ(mv)}
+                      >
+                        {" "}
+                        Delete{" "}
+                      </Button>
+                    </div>
+                  </Col>
+                </Row>
+              ))
+            })}
           </ListGroup>
+          <div className="py-2">
+            <CreateMCQ id={id} assessmentId={assessmentId} />
+          </div>
           <div className="py-2">
             <CreateMV id={id} assessmentId={assessmentId} />
           </div>
