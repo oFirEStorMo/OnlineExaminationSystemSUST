@@ -694,14 +694,41 @@ class GetQuestionView(APIView):
 
         unsubmittedMV = MicroViva.objects.filter(microvivasubmission__candidate__id=payload['candidateId'], microvivasubmission__submissionEndTime__gt=datetime.datetime.now(
             datetime.timezone.utc), microvivasubmission__isSubmitted=0, assessment__id=request.data['assessmentId']).values('id')
+
         if unsubmittedMV:
             data = unsubmittedMV[0]
             print(data)
             return Response(data=data, status=status.HTTP_200_OK)
 
+        last_submission = MCQSubmission.objects.filter(
+            assessment__id=request.data['assessmentId'], mcqsubmission__candidate__id=payload['candidateId']).latest('submittedAt')
+        if last_submission:
+            last_submitted_mcq = MCQ.objects.filter(pk=last_submission.mcq_id)
+            left_in_group = MCQ.objects.filter(questionGroup=last_submitted_mcq.questionGroup,
+                                               created_at__gt=last_submitted_mcq.createdAt).order_by('createdAt').first()
+            if left_in_group:
+                return Response(data=left_in_group, status=status.HTTP_200_OK)
+            else:
+                data = {
+                    'user': payload['candidateId'],
+                    'group': last_submitted_mcq.questionGroup
+                }
+                user_and_group = UserAndGroupSerializer(data=data)
+                user_and_group.is_valid(raise_exception=True)
+                user_and_group.save()
+
         group_list = QuestionGroup.objects.filter(
-            assessment__id=request.data['assessmentId'])
+            assessment__id=request.data['assessmentId'], isDone=False)
+
         group_id = group_list[randint(0, group_list.count()-1)]['id']
+        group_submission = UserAndGroup.objects.filter(
+            user__id=payload['candidateId'], group__id=group_id)
+        while (len(group_submission) != 0):
+            group_id = group_list[randint(0, group_list.count()-1)]['id']
+            group_submission = UserAndGroup.objects.filter(
+                user__id=payload['candidateId'], group__id=group_id).values()
+            temp_group_submission = UserAndGroup.objects.filter(
+                user__id=payload['candidateId'])
 
         mcqList = list(MCQ.objects.filter(
             ~Q(mcqsubmission__candidate__id=payload['candidateId']), assessment__id=request.data['assessmentId']).values('id', 'MCQQuestion'))
