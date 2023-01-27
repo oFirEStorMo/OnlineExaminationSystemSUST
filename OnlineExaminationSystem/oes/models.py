@@ -125,6 +125,7 @@ class MCQ(models.Model):
     totalMarks = models.IntegerField(validators=[validate_marks])
 
     totalTime = models.IntegerField(validators=[validate_mcq_time])
+    created_at = models.DateTimeField(auto_now=True)
 
 # Stores data of a MicroViva question within an Assessment
 
@@ -148,6 +149,7 @@ class MicroViva(models.Model):
     totalMarks = models.IntegerField(validators=[validate_marks])
 
     totalTime = models.IntegerField()
+    created_at = models.DateTimeField(auto_now=True)
 
 
 # Stores data of the choices in an MCQ
